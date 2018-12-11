@@ -1,3 +1,4 @@
+import pygame
 class Paddle(pygame.sprite.Sprite):
 
     def __init__(self, color):

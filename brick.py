@@ -1,4 +1,7 @@
 import pygame
+import ball
+import paddle
+import ball
 class Brick(pygame.sprite.Sprite):
 
     def __init__(self, width, color):

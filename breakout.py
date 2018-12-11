@@ -1,13 +1,13 @@
 import pygame
-import brick.py
-import ball.py
-import paddle.py
+import brick
+import ball
+import paddle
+import sys
+from pygame.locals import *
 
-pygame.init()
-mainSurface = pygame.display.set_mode((500, 500), 0, 32)
-pygame.display.set_caption("Break out")
 
 def main():
+    pygame.init()
     #Constants that will be used in the program
     APPLICATION_WIDTH = 400
     APPLICATION_HEIGHT = 600
@@ -18,6 +18,8 @@ def main():
     BRICK_WIDTH = (APPLICATION_WIDTH - (BRICKS_PER_ROW -1) * BRICK_SEP) / BRICKS_PER_ROW
     NUM_TURNS = 3
 
+
+
     #Sets up the colors
     RED = (255, 0, 0)
     ORANGE = (255, 165, 0)
@@ -26,5 +28,12 @@ def main():
     CYAN = (0, 255, 255)
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
+    my_ball = ball.Ball()
 
+    while True:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+    my_ball.move()
 main()

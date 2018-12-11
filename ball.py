@@ -1,32 +1,20 @@
 import pygame
-import sys
+
 class Ball(pygame.sprite.Sprite):
 
-    def __init__(self, color, windowWidth, windowHeight):
+    def __init__(self):
         self.RADIUS = 10
+        RED = (255, 0, 0)
+        self.image = pygame.mainSurface((self.RADIUS * 2, self.RADIUS *2))
+        self.rect = self.image.get_rect()
+        pygame.draw.circle(self.image, self.RED, (25, 25), self.RADIUS, 0)
+        self.speedx = 5
+        self.speedy = 3
 
     def move(self):
-        block = pygame.Surface((50, 50))
-        rect = block.get_rect()
-        pygame.draw.rect(block, self.WHITE, (0, 0, 50, 50), 0)
-        pygame.draw.circle(block, self.RED, (25, 25), 25, 0)
-        speedx = 5
-        speedy = 3
-
-        while True:
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-                mainSurface.fill(self.WHITE)
-                rect.top += speedy
-                rect.left += speedx
-                if rect.top < 0 or rect.bottom > 500:
-                    speedy = -speedy
-                if rect.left < 0 or rect.right > 500:
-                    speedx = -speedx
-
-                mainSurface.blit(block, rect)
-
-                pygame.display.update()
-
+        self.rect.top += self.speedy
+        self.rect.left += self.speedx
+        if self.rect.top < 0 or self.rect.bottom > 500:
+            self.speedy = -self.speedy
+        if self.rect.left < 0 or self.rect.right > 500:
+            self.speedx = - self.speedx
