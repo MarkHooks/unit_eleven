@@ -2,14 +2,20 @@ import pygame
 
 class Ball(pygame.sprite.Sprite):
 
-    def __init__(self):
-        self.RADIUS = 10
-        RED = (255, 0, 0)
-        self.image = pygame.mainSurface((self.RADIUS * 2, self.RADIUS *2))
+    def __init__(self, color, windowWidth, windowHeight, radius):
+        # initialize sprite super class
+
+        # finish setting the class variables to the parameters
+        self.color = color
+        self.radius = radius
+        # Create a surface, get the rect coordinates, fill the surface with a white color (or whatever color the
+        # background of your breakout game will be.
+        self.image = pygame.Surface((self.radius * 2, self.radius *2))
         self.rect = self.image.get_rect()
-        pygame.draw.circle(self.image, self.RED, (25, 25), self.RADIUS, 0)
+        # pygame.draw.circle(self.image, self.color, (25, 25), self.radius, 0)
         self.speedx = 5
         self.speedy = 3
+        # Add a circle to represent the ball to the surface just created.
 
     def move(self):
         self.rect.top += self.speedy
@@ -18,3 +24,4 @@ class Ball(pygame.sprite.Sprite):
             self.speedy = -self.speedy
         if self.rect.left < 0 or self.rect.right > 500:
             self.speedx = - self.speedx
+
