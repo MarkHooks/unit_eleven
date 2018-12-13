@@ -4,7 +4,7 @@ class Paddle(pygame.sprite.Sprite):
 
     def __init__(self, main_surface, color, width, height):
         # initialize sprite super class
-
+        super().__init__()
         # finish setting the class variables to the parameters
         self.main_surface = main_surface
         self.width = width
