@@ -16,6 +16,7 @@ class Paddle(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         # Fill the surface with the correct color
-        self.color = color
-    def move(self):
-        pass
+        self.image.fill(color)
+
+    def move(self, position):
+        self.rect.x = position[0]

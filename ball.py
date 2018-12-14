@@ -18,6 +18,7 @@ class Ball(pygame.sprite.Sprite):
         # Add a circle to represent the ball to the surface just created.
 
     def move(self):
+
         self.rect.top += self.speedy
         self.rect.left += self.speedx
         if self.rect.top < 0 or self.rect.bottom > 500:

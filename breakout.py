@@ -39,38 +39,39 @@ def main():
 
     xpos = 0
     ypos = BRICK_Y_OFFSET
-    for x in range(10):
-        colors = [RED, ORANGE, YELLOW, GREEN, CYAN]
-        for color in colors:
-            brick_color = color
-            my_brick = brick.Brick(BRICK_WIDTH, BRICK_HEIGHT, brick_color)
-            my_brick.rect.x = xpos
-            my_brick.rect.y = ypos
+    main_window.fill(WHITE)
+    colors = [RED, ORANGE, YELLOW, GREEN, CYAN]
+    for color in colors:
+        for x in range(2):
+            for y in range(10):
+                brick_color = color
+                my_brick = brick.Brick(BRICK_WIDTH, BRICK_HEIGHT, brick_color)
+                my_brick.rect.x = xpos
+                my_brick.rect.y = ypos
+                main_window.blit(my_brick.image, my_brick.rect)
 
-            main_window.blit(my_brick.image, my_brick.rect)
-        #ypos += BRICK_Y_OFFSET + BRICK_HEIGHT
-        xpos += BRICK_SEP + BRICK_WIDTH
+                xpos += (BRICK_SEP + BRICK_WIDTH)
+            xpos = 0
+            ypos += BRICK_SEP + BRICK_HEIGHT
 
-    pygame.display.update()
+    my_paddle = paddle.Paddle(main_window, BLACK, PADDLE_WIDTH, PADDLE_HEIGHT)
+    my_paddle.rect.x = APPLICATION_WIDTH/2
+    my_paddle.rect.y = APPLICATION_HEIGHT - PADDLE_Y_OFFSET
+
+    my_ball = ball.Ball(RED, ball_width, ball_height, RADIUS_OF_BALL)
+    my_ball.move()
 
     while True:
         for event in pygame.event.get():
             if event == QUIT:
                 pygame.quit()
                 sys.exit()
-        #main_window.fill(WHITE)
-        #  my_ball = ball.Ball(RED, ball_width, ball_height, RADIUS_OF_BALL)
-        # main_window.blit(my_ball.image, my_ball.rect)
-        # if my_ball.rect.top < 0 or my_ball.rect.bottom > 500:
-        #     speedy = - speedy
-        # if my_ball.rect.left < 0 or my_ball.rect.right > 500:
-        #     speedx = - speedx
-        # main_window.blit(my_ball.image, my_ball.rect)
+            if event.type == MOUSEMOTION:
+                paddle.move(pygame.mouse.get_pos())
 
-        # my_paddle = paddle.Paddle(main_window, WHITE, PADDLE_WIDTH, PADDLE_HEIGHT)
-        # main_window.blit(my_paddle.image, my_paddle.rect)
+        main_window.blit(my_ball.image, my_ball.rect)
 
-
+        main_window.blit(my_paddle.image, my_paddle.rect)
 
         pygame.display.update()
 
