@@ -1,7 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 import block
-
+import random
 
 pygame.init()
 WINDOW_WIDTH = 500
@@ -16,23 +16,16 @@ GREEN = (0, 255, 0)
 WHITE = (255, 255, 255)
 WIDTH = 25
 HEIGHT = 25
+group = pygame.sprite.Group()
+for x in range(10):
+    my_block = block.Block(main_window, WIDTH, HEIGHT, BLUE)
+    group.add(my_block)
+    my_block.rect.x = random.randint(WIDTH, WINDOW_WIDTH - WIDTH)
+    my_block.rect.y = random.randint(HEIGHT, WINDOW_HEIGHT - HEIGHT)
 
-my_block = block.Block(main_window, WIDTH, HEIGHT, BLUE)
-my_block.rect.x = 10
-my_block.rect.y = 10
 main_window.blit(my_block.image, my_block.rect)
 pygame.display.update()
 
-group = pygame.sprite.Group()
-my_block = block.Block(main_window, WIDTH, HEIGHT, BLUE)
-new_block = block.Block(main_window, WIDTH, HEIGHT, GREEN)
-group.add(my_block)
-group.add(new_block)
-
-my_block.rect.x = 10
-my_block.rect.y = 10
-new_block.rect.x = WINDOW_WIDTH - 35
-new_block.rect.y = WINDOW_WIDTH - 35
 
 while True:
     for event in pygame.event.get():
