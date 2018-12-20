@@ -20,3 +20,6 @@ class Paddle(pygame.sprite.Sprite):
 
     def move(self, position):
         self.rect.x = position[0]
+        if self.rect.right > 400:
+            self.rect.x = 350
+            pygame.display.update()

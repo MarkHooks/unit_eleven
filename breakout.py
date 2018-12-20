@@ -17,7 +17,7 @@ def main():
     BRICK_HEIGHT = 8
     PADDLE_WIDTH = 60
     PADDLE_HEIGHT = 10
-    RADIUS_OF_BALL = 10
+    RADIUS_OF_BALL = 7
     NUM_TURNS = 3
     ball_width = RADIUS_OF_BALL * 2
     ball_height = RADIUS_OF_BALL * 2
@@ -61,20 +61,28 @@ def main():
                 xpos += (BRICK_SEP + BRICK_WIDTH)
             xpos = 0
             ypos += BRICK_SEP + BRICK_HEIGHT
-
     while True:
+        num_turns = 3
         for event in pygame.event.get():
             if event == QUIT:
                 pygame.quit()
                 sys.exit()
             if event.type == MOUSEMOTION:
                 my_paddle.move(pygame.mouse.get_pos())
-
+            if num_turns == 0:
+                break
         main_window.fill(WHITE)
 
-        my_ball.move()
+        if brick_group.has() == False:
+            mousefont = pygame.font.SysFont("Helvetica", 30)
+            mouselable = mousefont.render("You Win", 1, (0, 0, 0))
+            main_window.blit(mouselable, (30, 30))
+
+        my_ball.move(num_turns)
         my_ball.colide(paddle_group, brick_group)
         main_window.blit(my_ball.image, my_ball.rect)
+
+
 
         for a_brick in brick_group:
             main_window.blit(a_brick.image, a_brick.rect)
