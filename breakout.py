@@ -17,7 +17,7 @@ def main():
     BRICK_HEIGHT = 8
     PADDLE_WIDTH = 60
     PADDLE_HEIGHT = 10
-    RADIUS_OF_BALL = 7
+    RADIUS_OF_BALL = 10
     NUM_TURNS = 3
     ball_width = RADIUS_OF_BALL * 2
     ball_height = RADIUS_OF_BALL * 2
@@ -51,6 +51,7 @@ def main():
     my_ball.rect.y = 200
 
     colors = [RED, ORANGE, YELLOW, GREEN, CYAN]
+
     for color in colors:
         for x in range(2):
             for y in range(10):
@@ -62,27 +63,32 @@ def main():
             xpos = 0
             ypos += BRICK_SEP + BRICK_HEIGHT
     while True:
-        num_turns = 3
         for event in pygame.event.get():
             if event == QUIT:
                 pygame.quit()
                 sys.exit()
             if event.type == MOUSEMOTION:
                 my_paddle.move(pygame.mouse.get_pos())
-            if num_turns == 0:
-                break
+        if my_ball.rect.bottom > 580:
+            NUM_TURNS -= 1
+            print(NUM_TURNS)
         main_window.fill(WHITE)
-
-        if brick_group.has() == False:
+        if len(brick_group) == 0:
             mousefont = pygame.font.SysFont("Helvetica", 30)
             mouselable = mousefont.render("You Win", 1, (0, 0, 0))
             main_window.blit(mouselable, (30, 30))
-
-        my_ball.move(num_turns)
+            pygame.display.update()
+            pygame.time.wait(1000)
+        if NUM_TURNS == -5:
+            mousefont = pygame.font.SysFont("Helvetica", 30)
+            mouselable = mousefont.render("You Lose", 1, (0, 0, 0))
+            main_window.blit(mouselable, (30, 30))
+            pygame.display.update()
+        if NUM_TURNS == -6:
+            pygame.time.wait(100000)
+        my_ball.move(NUM_TURNS)
         my_ball.colide(paddle_group, brick_group)
         main_window.blit(my_ball.image, my_ball.rect)
-
-
 
         for a_brick in brick_group:
             main_window.blit(a_brick.image, a_brick.rect)
@@ -90,6 +96,7 @@ def main():
         main_window.blit(my_paddle.image, my_paddle.rect)
 
         pygame.display.update()
+
 
 
 main()

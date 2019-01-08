@@ -1,6 +1,5 @@
 import pygame
 import sys
-import math
 class Ball(pygame.sprite.Sprite):
 
     def __init__(self, color, windowWidth, windowHeight, radius):
@@ -17,7 +16,7 @@ class Ball(pygame.sprite.Sprite):
         self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
         # pygame.draw.circle(self.image, self.color, (25, 25), self.radius, 0)
-        self.speedx = 5
+        self.speedx = 7
         self.speedy = 7
         # Add a circle to represent the ball to the surface just created.
         pygame.draw.circle(self.image, color, (radius, radius), radius, 0)
@@ -31,7 +30,6 @@ class Ball(pygame.sprite.Sprite):
         if self.rect.top < 0:
             self.speedy = -self.speedy
         if self.rect.bottom > 600:
-            num_turns -= 1
             self.rect.x = 200
             self.rect.y = 200
         if num_turns == 0:
