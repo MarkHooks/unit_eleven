@@ -29,6 +29,7 @@ def main():
     CYAN = (0, 255, 255)
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
+    REDER = (200, 0, 0)
 
     # Step 1: Use loops to draw the rows of bricks. The top row of bricks should be 70 pixels away from the top of
     # the screen (BRICK_Y_OFFSET)
@@ -41,12 +42,12 @@ def main():
     xpos = 0
     ypos = BRICK_Y_OFFSET
 
-    my_paddle = paddle.Paddle(main_window, BLACK, PADDLE_WIDTH, PADDLE_HEIGHT)
+    my_paddle = paddle.Paddle(main_window, RED, PADDLE_WIDTH, PADDLE_HEIGHT)
     paddle_group.add(my_paddle)
     my_paddle.rect.x = APPLICATION_WIDTH/2
     my_paddle.rect.y = APPLICATION_HEIGHT - PADDLE_Y_OFFSET
 
-    my_ball = ball.Ball(RED, ball_width, ball_height, RADIUS_OF_BALL)
+    my_ball = ball.Ball(REDER, ball_width, ball_height, RADIUS_OF_BALL)
     my_ball.rect.x = 200
     my_ball.rect.y = 200
 
@@ -63,28 +64,34 @@ def main():
             xpos = 0
             ypos += BRICK_SEP + BRICK_HEIGHT
     while True:
+        mousefont = pygame.font.SysFont("Helvetica", 30)
+        mouselable = mousefont.render(str(NUM_TURNS), 80, (255, 255, 255))
+        main_window.blit(mouselable, (350, 30))
+        pygame.display.update()
         for event in pygame.event.get():
             if event == QUIT:
                 pygame.quit()
                 sys.exit()
             if event.type == MOUSEMOTION:
                 my_paddle.move(pygame.mouse.get_pos())
-        if my_ball.rect.bottom > 580:
+        if my_ball.rect.bottom > 590:
+            my_ball.rect.x = 200
+            my_ball.rect.y = 200
             NUM_TURNS -= 1
             print(NUM_TURNS)
-        main_window.fill(WHITE)
+        main_window.fill(BLACK)
         if len(brick_group) == 0:
             mousefont = pygame.font.SysFont("Helvetica", 30)
-            mouselable = mousefont.render("You Win", 1, (0, 0, 0))
+            mouselable = mousefont.render("You Win", 1, (0, 255, 0))
             main_window.blit(mouselable, (30, 30))
             pygame.display.update()
             pygame.time.wait(1000)
-        if NUM_TURNS == -5:
+        if NUM_TURNS == 1 and my_ball.rect.bottom > 580:
             mousefont = pygame.font.SysFont("Helvetica", 30)
-            mouselable = mousefont.render("You Lose", 1, (0, 0, 0))
+            mouselable = mousefont.render("You Lose", 1, (255, 0, 0))
             main_window.blit(mouselable, (30, 30))
             pygame.display.update()
-        if NUM_TURNS == -6:
+        if NUM_TURNS == 0:
             pygame.time.wait(100000)
         my_ball.move(NUM_TURNS)
         my_ball.colide(paddle_group, brick_group)
