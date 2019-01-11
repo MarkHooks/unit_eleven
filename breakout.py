@@ -30,6 +30,7 @@ def main():
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
     REDER = (200, 0, 0)
+    BLUE = (0, 0, 255)
 
     # Step 1: Use loops to draw the rows of bricks. The top row of bricks should be 70 pixels away from the top of
     # the screen (BRICK_Y_OFFSET)
@@ -79,7 +80,7 @@ def main():
             my_ball.rect.y = 200
             NUM_TURNS -= 1
             print(NUM_TURNS)
-        main_window.fill(BLACK)
+        main_window.fill(BLUE)
         if len(brick_group) == 0:
             mousefont = pygame.font.SysFont("Helvetica", 30)
             mouselable = mousefont.render("You Win", 1, (0, 255, 0))

@@ -10,10 +10,11 @@ class Brick(pygame.sprite.Sprite):
         self.color = color
         self.height = height
         # Create a surface with the correct height and width
-        self.image = pygame.Surface((width, height))
+        self.image = pygame.image.load("wood2.png")
+            #Surface((width, height))
 
         # Get the rect coordinates
         self.rect = self.image.get_rect()
 
         # Fill the surface with the correct color
-        self.image.fill(color)
+        #self.image.fill(color)
