@@ -13,8 +13,6 @@ class Ball(pygame.sprite.Sprite):
         # Create a surface, get the rect coordinates, fill the surface with a white color (or whatever color the
         # background of your breakout game will be.
         self.image = pygame.image.load("cannon ball copy1.png")
-            #Surface((self.radius * 2, self.radius *2))
-        #self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
         # pygame.draw.circle(self.image, self.color, (25, 25), self.radius, 0)
         self.speedx = 7

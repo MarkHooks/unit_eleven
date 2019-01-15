@@ -31,6 +31,7 @@ def main():
     WHITE = (255, 255, 255)
     REDER = (200, 0, 0)
     BLUE = (0, 0, 255)
+    lose = pygame.image.load("skull copy.png")
 
     # Step 1: Use loops to draw the rows of bricks. The top row of bricks should be 70 pixels away from the top of
     # the screen (BRICK_Y_OFFSET)
@@ -39,7 +40,7 @@ def main():
     pygame.init()
     main_window = pygame.display.set_mode((APPLICATION_WIDTH, APPLICATION_HEIGHT), 32, 0)
     pygame.display.set_caption("Breakout")
-
+    bg = pygame.image.load("ocean.png")
     xpos = 0
     ypos = BRICK_Y_OFFSET
 
@@ -80,7 +81,8 @@ def main():
             my_ball.rect.y = 200
             NUM_TURNS -= 1
             print(NUM_TURNS)
-        main_window.fill(BLUE)
+        main_window.blit(bg,(0,0))
+        #main_window.fill(BLUE)
         if len(brick_group) == 0:
             mousefont = pygame.font.SysFont("Helvetica", 30)
             mouselable = mousefont.render("You Win", 1, (0, 255, 0))
@@ -88,9 +90,9 @@ def main():
             pygame.display.update()
             pygame.time.wait(1000)
         if NUM_TURNS == 1 and my_ball.rect.bottom > 580:
-            mousefont = pygame.font.SysFont("Helvetica", 30)
-            mouselable = mousefont.render("You Lose", 1, (255, 0, 0))
-            main_window.blit(mouselable, (30, 30))
+            #mousefont = pygame.font.SysFont("Helvetica", 30)
+            #mouselable = mousefont.render("You Lose", 1, (255, 0, 0))
+            main_window.blit(lose, (75, 250))
             pygame.display.update()
         if NUM_TURNS == 0:
             pygame.time.wait(100000)
