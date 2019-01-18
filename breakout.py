@@ -55,7 +55,10 @@ def main():
     my_ball.rect.y = 200
 
     colors = [RED, ORANGE, YELLOW, GREEN, CYAN]
-
+    pygame.mixer.init()
+    pygame.init()
+    theme = pygame.mixer.Sound("Pirates of the Caribbean - Hes a Pirate-2.wav")
+    theme.play(10)
     for color in colors:
         for x in range(2):
             for y in range(10):
@@ -66,7 +69,9 @@ def main():
                 xpos += (BRICK_SEP + BRICK_WIDTH)
             xpos = 0
             ypos += BRICK_SEP + BRICK_HEIGHT
+
     while True:
+
         mousefont = pygame.font.SysFont("Helvetica", 30)
         mouselable = mousefont.render(str(NUM_TURNS), 80, (255, 100, 100))
         main_window.blit(mouselable, (350, 30))
